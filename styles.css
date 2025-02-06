@@ -1,0 +1,255 @@
+:root {
+    --bg: #030303;
+    --text: #ffffff;
+    --accent: #00f0ff;
+    --secondary: #ff00ff;
+    --surface: rgba(255, 255, 255, 0.03);
+    --font-display: 'Clash Display', sans-serif;
+    --font-body: 'Space Grotesk', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.cursor-glow {
+    width: 30px;
+    height: 30px;
+    background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: screen;
+    transition: transform 0.1s ease;
+}
+
+.gradient-mesh {
+    position: fixed;
+    inset: 0;
+    background: 
+        radial-gradient(circle at 20% 20%, var(--accent) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, var(--secondary) 0%, transparent 50%);
+    opacity: 0.1;
+    z-index: -1;
+    filter: blur(100px);
+}
+
+/* Typography */
+h1, h2, h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    line-height: 1.1;
+}
+
+h1 {
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    background: linear-gradient(to right, var(--text), transparent);
+    -webkit-background-clip: text;
+    color: transparent;
+    margin-bottom: 2rem;
+}
+
+h2 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    margin-bottom: 1.5rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Layout Components */
+.content-block {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Header */
+header {
+    position: fixed;
+    width: 100%;
+    padding: 2rem;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+nav ul {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+}
+
+nav a {
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-highlight {
+    color: var(--accent);
+}
+
+/* Hero Section */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4rem 2rem;
+}
+
+.hero-content {
+    max-width: 800px;
+}
+
+.hero-text p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    opacity: 0.8;
+}
+
+/* Feature Cards */
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.feature-card {
+    padding: 2rem;
+    background: var(--surface);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent);
+}
+
+.feature-icon {
+    font-size: 1.5rem;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 1rem;
+}
+
+/* Product Cards */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.product-card {
+    padding: 2rem;
+    background: var(--surface);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.product-card.featured {
+    border-color: var(--accent);
+}
+
+.price {
+    display: block;
+    font-size: 2rem;
+    font-weight: 500;
+    margin: 1.5rem 0;
+    color: var(--accent);
+}
+
+/* Buttons */
+.btn-primary, .btn-outline {
+    display: inline-block;
+    padding: 1rem 2rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background: var(--accent);
+    color: var(--bg);
+}
+
+.btn-outline {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text);
+}
+
+.btn-outline:hover {
+    border-color: var(--accent);
+}
+
+/* Footer */
+footer {
+    padding: 4rem 2rem;
+    background: var(--surface);
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Animations */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero, .feature-card, .product-card {
+    animation: fadeUp 0.8s ease forwards;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    nav ul {
+        display: none;
+    }
+    
+    .hero-content {
+        padding: 0;
+    }
+    
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+}
